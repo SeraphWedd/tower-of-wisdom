@@ -19,9 +19,15 @@ class GameObject(object):
         self.floor = floor
         self.game = GE
         self.image = pg.surface.Surface((64, 64)).convert_alpha()
+        self.image.fill((np.random.randint(0, 255),
+                         np.random.randint(0, 255),
+                         np.random.randint(0, 255),
+                         50))
         self.rect = self.image.get_rect()
 
     def update(self, dt):
+        self.game.x[self.floor, self.i] += -40 * dt
+        self.game.y[self.floor, self.i] += -30 * dt
         self.rect.center = (self.game.x[self.floor, self.i],
                             self.game.y[self.floor, self.i])
 
