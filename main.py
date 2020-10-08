@@ -1,5 +1,8 @@
 import pygame as pg
 import numpy as np
+import os
+
+os.environ['SDL_VIDEO_CENTERED'] = '1'
 
 class GameEngine(object):
     def __init__(self, width, height, fps):
@@ -29,8 +32,8 @@ class GameEngine(object):
         #Get screen items
         self.dx = self.x - self.screen_center[0]
         self.dy = self.y - self.screen_center[1]
-        self.to_blit = ((np.abs(self.dx)<=self.width+self.buffer) &
-                        (np.abs(self.dy)<=self.height+self.buffer))
+        self.to_blit = ((np.abs(self.dx)<=self.width/2+self.buffer) &
+                        (np.abs(self.dy)<=self.height/2+self.buffer))
 
     def main_loop(self):
         count = 0
@@ -65,7 +68,7 @@ class GameEngine(object):
 
 if __name__ == "__main__":
     from Scripts.game_objects import GameObject
-    GE = GameEngine(800, 600, 60)
+    GE = GameEngine(1024, 720, 60)
     for j in range(101):
         for i in range(1000):
             GE.entities.append(GameObject(GE, i, j))
